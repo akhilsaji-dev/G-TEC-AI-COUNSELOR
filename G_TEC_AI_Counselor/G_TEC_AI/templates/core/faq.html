@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    /* FAQ */
+.faq-item {
+    margin-top: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 10px;
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    color: #e2e8f0;
+    font-size: 16px;
+    text-align: left;
+    padding: 10px 0;
+    cursor: pointer;
+    position: relative;
+}
+
+/* arrow */
+.faq-question::after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    transition: 0.3s;
+}
+
+.faq-question.active::after {
+    content: "-";
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.3s ease;
+    color: #94a3b8;
+}
+</style>
+<div class="card">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+        <button class="faq-question">What is this platform?</button>
+        <div class="faq-answer">
+            <p>An AI-based career guidance system designed to help students choose the right path.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">Is it free?</button>
+        <div class="faq-answer">
+            <p>Yes, it is completely free for students.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">How does AI help?</button>
+        <div class="faq-answer">
+            <p>It analyzes your interests, skills, and preferences to suggest suitable careers.</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- JS -->
+<script>
+    const questions = document.querySelectorAll(".faq-question");
+
+    questions.forEach(q => {
+        q.addEventListener("click", () => {
+            const answer = q.nextElementSibling;
+
+            // close others (optional pro feature)
+            document.querySelectorAll(".faq-answer").forEach(a => {
+                if (a !== answer) {
+                    a.style.maxHeight = null;
+                }
+            });
+
+            // toggle
+            if (answer.style.maxHeight) {
+                answer.style.maxHeight = null;
+            } else {
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            }
+        });
+    });
+</script>
+
+{% endblock %}

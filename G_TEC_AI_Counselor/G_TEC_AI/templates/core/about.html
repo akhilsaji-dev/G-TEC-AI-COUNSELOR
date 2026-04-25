@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    /* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0f172a, #020617);
+    color: #e2e8f0;
+}
+
+/* NAVBAR */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 18px 20px;
+
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.logo span {
+    color: #38bdf8;
+}
+
+/* NAV LINKS */
+.nav-links a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #cbd5f5;
+    font-size: 14px;
+    position: relative;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #38bdf8;
+}
+
+/* underline animation */
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: #38bdf8;
+    transition: 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* ACTIVE LINK */
+.nav-links a.active {
+    color: #38bdf8;
+}
+
+/* LOGIN BUTTON */
+.login-btn {
+    padding: 6px 14px;
+    border: 1px solid #38bdf8;
+    border-radius: 6px;
+}
+
+.login-btn:hover {
+    background: #38bdf8;
+    color: black;
+}
+
+/* MAIN */
+main {
+    padding: 40px 20px;
+}
+
+/* CARD */
+.card {
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
+    border-radius: 12px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    transition: 0.3s ease;
+}
+
+.card + .card {
+    margin-top: 20px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* TEXT */
+.subtitle {
+    margin: 10px 0 20px;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+ul {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+}
+</style>
+<div class="card">
+    <h1>About G-TEC AI Counselor</h1>
+
+    <p class="subtitle">
+        Smart career guidance powered by AI.
+    </p>
+
+    <p>
+        G-TEC AI Counselor helps students make informed career decisions using intelligent analysis 
+        and personalized recommendations. Instead of guessing your future, you explore it with clarity.
+    </p>
+</div>
+
+<div class="card">
+    <h2>🎯 Our Mission</h2>
+    <p>
+        To eliminate confusion in career paths by guiding students with data-driven insights 
+        and real-time AI support.
+    </p>
+</div>
+
+<div class="card">
+    <h2>⚙️ How It Works</h2>
+    <ul>
+        <li>Analyze student interests and skills</li>
+        <li>Match with suitable career paths</li>
+        <li>Provide personalized AI recommendations</li>
+        <li>Continuous learning and improvement</li>
+    </ul>
+</div>
+
+{% endblock %}
