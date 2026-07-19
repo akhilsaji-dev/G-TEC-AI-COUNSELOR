@@ -103,7 +103,8 @@ def get_ai_response(user_input):
     headers = {
         "Authorization": f"Bearer {API_KEY}",
         "Content-Type": "application/json"
-    }
+    } 
+   #  headers include the API key for authentication and specify that the content type is JSON.
 
     payload = {
         "model": "gpt-4.1-nano",

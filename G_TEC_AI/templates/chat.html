@@ -1,221 +1,300 @@
-
+{% load static %}
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>G-TEC AI Counselor</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>G-TEC AI Counselor</title>
+  <link rel="icon" href="{% static 'images/logo.webp' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-/* ===== GLOBAL ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  <style>
+    /* ===== GLOBAL ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body {
-  font-family: 'Segoe UI', sans-serif;
-  height: 100vh;
-  background: linear-gradient(135deg, #0f2027, #295564, #448ba9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #020617);
+      color: #e2e8f0;
+    }
 
-/* ===== CHAT CONTAINER ===== */
-.chat-container {
-  width: 100%;
-  max-width: 850px;
-  height: 90vh;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(15px);
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
+    /* ===== NAVBAR ===== */
+    .navbar {
+      width: 100%;
+      padding: 15px 30px;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
 
-/* ===== HEADER ===== */
-.header {
-  padding: 20px;
-  text-align: center;
-  color: white;
-  font-size: 22px;
-  font-weight: bold;
-  background: rgba(0,0,0,0.3);
-  letter-spacing: 1px;
+    }
 
-}
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
 
-.header p {
-  font-size: 14px;
-  color: rgba(255,255,255,0.7);
-  margin-top: 5px;
-}
+    .nav-links a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 14px;
+      transition: 0.3s;
+    }
 
-/* ===== CHAT BOX ===== */
-.chat-box {
-  flex: 1;
-  padding: 20px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
+    .nav-links a:hover {
+      color: #00eaff;
+    }
 
-/* Scrollbar */
-.chat-box::-webkit-scrollbar {
-  width: 6px;
-}
-.chat-box::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.2);
-  border-radius: 10px;
-}
+    .login-btn {
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
 
-/* ===== MESSAGE ===== */
-.message {
-  max-width: 75%;
-  padding: 14px 18px;
-  border-radius: 15px;
-  line-height: 1.6;
-  font-size: 14px;
-  animation: fadeIn 0.3s ease;
-}
+    /* ===== MAIN CENTER ===== */
+    .main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 70px);
+    }
 
-/* USER */
-.user {
-  align-self: flex-end;
-  background: linear-gradient(135deg, #00c6ff, #0072ff);
-  color: white;
-  border-bottom-right-radius: 5px;
-}
+    /* ===== CHAT CONTAINER ===== */
+    .chat-container {
+      width: 100%;
+      max-width: 850px;
+      height: 90vh;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
 
-/* BOT */
-.bot {
-  align-self: flex-start;
-  background: rgba(255,255,255,0.15);
-  color: #fff;
-  border-bottom-left-radius: 5px;
-}
+    /* ===== HEADER ===== */
+    /* .header {
+      padding: 20px;
+      text-align: center;
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+    }
 
-/* ===== INPUT AREA ===== */
-.input-box {
-  display: flex;
-  padding: 15px;
-  background: rgba(0,0,0,0.3);
-  gap: 10px;
-}
+    .header p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+    } */
+    .header {
+      padding: 15px 20px;
+      background: rgba(0, 0, 0, 0.3);
 
-/* TEXTAREA */
-textarea {
-  flex: 1;
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  resize: none;
-  font-size: 14px;
-  background: rgba(255,255,255,0.1);
-  color: white;
-}
+      gap: 15px;
+    }
 
-textarea::placeholder {
-  color: rgba(255,255,255,0.6);
-}
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
 
-/* BUTTON */
-button {
-  padding: 0 20px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  background: linear-gradient(135deg, #00c6ff, #0072ff);
-  color: white;
-  transition: 0.3s;
-}
+    /* LOGO */
+    .logo img {
+      width: 80px;
+      height: 45px;
+      border-radius: 10px;
+    }
 
-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
+    /* TEXT */
+    .title h2 {
+      font-size: 18px;
+      color: #fff;
+    }
 
-/* ===== BOT CONTENT STYLING ===== */
-.message.bot h3 {
-  margin-top: 10px;
-  color: #00eaff;
-}
+    .title p {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+    }
 
-.message.bot ul,
-.message.bot ol {
-  padding-left: 20px;
-}
+    /* ===== CHAT BOX ===== */
+    .chat-box {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
 
-.message.bot li {
-  margin-bottom: 5px;
-}
+    .chat-box::-webkit-scrollbar {
+      width: 6px;
+    }
 
-.message.bot p {
-  margin: 5px 0;
-}
+    .chat-box::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+    }
 
-/* ===== ANIMATION ===== */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    /* ===== MESSAGE ===== */
+    .message {
+      max-width: 75%;
+      padding: 14px 18px;
+      border-radius: 15px;
+      font-size: 14px;
+      animation: fadeIn 0.3s ease;
+    }
 
-/* ===== MOBILE ===== */
-@media (max-width: 600px) {
-  .chat-container {
-    height: 100vh;
-    border-radius: 0;
-  }
-}
-</style>
+    .user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: white;
+    }
+
+    .bot {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* ===== INPUT ===== */
+    .input-box {
+      display: flex;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      gap: 10px;
+    }
+
+    textarea {
+      flex: 1;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      resize: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    button {
+      padding: 0 20px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: white;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 12px;
+      font-size: 13px;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    /* ===== ANIMATION ===== */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 600px) {
+      .chat-container {
+        height: 100vh;
+        border-radius: 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="chat-container">
+  <!-- NAVBAR -->
+  <header class="navbar">
 
-  <div class="header">
-   G-TEC AI Counselor
-   <p> Powered by OpenAI's GPT-3.5</p>
-  </div>
-  
-<p></p>
-  <div class="chat-box">
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/about/">About</a>
+      <a href="/faq/">FAQ</a>
 
-    {% if user_message %}
-      <div class="message user">
-        {{ user_message }}
+      {% if user.is_authenticated %}
+      <a href="/logout/" class="login-btn">Logout</a>
+      {% else %}
+      <a href="/login/" class="login-btn">Login</a>
+      {% endif %}
+    </nav>
+  </header>
+
+
+  <div class="main">
+    <div class="chat-container">
+
+      <div class="header">
+        <div class="header-content">
+
+          <div class="logo">
+            <img src="{% static 'images/logo.webp' %}" alt="G-TEC AI Counselor Logo">
+          </div>
+
+          <div class="title">
+            <h2>G-TEC AI Counselor</h2>
+            <p>Powered by G-TEC AI LAB</p>
+          </div>
+
+        </div>
       </div>
-    {% endif %}
+      <div class="chat-box">
 
-    {% if response %}
-      <div class="message bot">
-        {{ response|safe }}
+        {% if user_message %}
+        <div class="message user">
+          {{ user_message }}
+        </div>
+        {% endif %}
+
+        {% if response %}
+        <div class="message bot">
+          {{ response|safe }}
+        </div>
+        {% endif %}
+
       </div>
-    {% endif %}
 
+      <form method="POST" class="input-box">
+        {% csrf_token %}
+        <textarea name="message" placeholder="Ask about courses, career..." required></textarea>
+        <button type="submit">➤</button>
+      </form>
+
+      <footer>
+        <b style="color:#6fe7f1;">G-TEC AI Counselor</b><br>
+        © 2026 All Rights Reserved | Built with Django<br>
+        <small>AI Courses • Career Guidance • Future Ready Skills</small>
+      </footer>
+
+    </div>
   </div>
-
-  <form method="POST" class="input-box">
-    {% csrf_token %}
-    <textarea name="message" placeholder="Ask about courses, career..." required></textarea>
-    <button type="submit">➤</button>
-  </form>
-
-</div>
 
 </body>
+
 </html>

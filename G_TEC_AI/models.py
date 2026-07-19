@@ -8,8 +8,3 @@ class Course(models.Model):
     level = models.CharField(max_length=50)  # Beginner/Intermediate
     duration = models.CharField(max_length=50)
 
-
-class ChatHistory(models.Model):
-    user_input = models.TextField()
-    ai_response = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
